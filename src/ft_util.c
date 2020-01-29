@@ -6,12 +6,11 @@
 /*   By: rmckinno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 12:40:14 by rmckinno          #+#    #+#             */
-/*   Updated: 2020/01/28 13:15:16 by rmckinno         ###   ########.fr       */
+/*   Updated: 2020/01/29 01:53:11 by rmckinno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
+#include "../lib/ft_bsq.h"
 
 int		ft_atoi(char *str)
 {
@@ -43,22 +42,25 @@ int		ft_atoi(char *str)
 
 char	*ft_read_line(int fd)
 {
-	char buff[100];
-	char *line;
-	int r;
-	int i;
+	char	line[1000];
+	char	ch;
+	char	*start;
+	int		r;
+	int		i;
 
-	r = 1;
+	ch = '0';
 	i = 0;
-	while (r)
+	while (ch != '\n')
 	{
-		r = read(fd, buff, 1);
-		if (buff[i] == '\n')
-		{
-			buff[i] = '\0';
-			r = 0;
-		}
+		read(fd, &ch, 1);
+		line[i++] = ch;
 	}
-	line = &buff[0];
-	return (line);
+	line[--i] = '\0';
+	start = (char *)malloc(sizeof(char) * i);
+	while (i > -1)
+	{
+		start[i] = line[i];
+		i--;
+	}
+	return (start);
 }

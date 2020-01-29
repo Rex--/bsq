@@ -6,25 +6,29 @@
 /*   By: rmckinno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:07:43 by rmckinno          #+#    #+#             */
-/*   Updated: 2020/01/28 00:07:33 by rmckinno         ###   ########.fr       */
+/*   Updated: 2020/01/29 01:56:12 by rmckinno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_BSQ_H
 # define FT_BSQ_H
 
-# define BUFFR_SIZE 	32768
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
 
-typedef	struct			Map
+typedef	struct	s_map
 {
 	char	**map;
 	char	empty;
 	char	obstacle;
 	char	full;
-}						Map;
-
-int						ft_atoi(char *str);
-char					*ft_read_line(int fd);
-Map						*read_map(int file);
-
+	int		lines;
+	int		length;
+}				t_map;
+int		ft_atoi(char *str);
+char	*ft_read_line(int fd);
+t_map	*get_map(int file);
+void	solve_map(t_map *m);
 #endif

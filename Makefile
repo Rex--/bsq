@@ -6,7 +6,7 @@
 #    By: rmckinno <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/27 12:49:59 by rmckinno          #+#    #+#              #
-#    Updated: 2020/01/27 23:24:52 by rmckinno         ###   ########.fr        #
+#    Updated: 2020/01/29 02:27:51 by rmckinno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INCLS := ft_bsq.h
 INCLDIR = lib/
 HEADERS = $(addprefix $(INCLDIR), $(INCLS))
 
-SRCS := bsq.c mapper.c ft_util.c
+SRCS := bsq.c mapper.c boxer.c ft_util.c
 SRCDIR = src/
 FILES = $(addprefix $(SRCDIR), $(SRCS))
 
