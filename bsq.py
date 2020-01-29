@@ -41,8 +41,8 @@ def findSubSquare(mat):
         hor[0][0] = 1
         ver[0][0] = 1
 
-    print('hor: ' + str(hor))
-    print('ver: ' + str(ver))
+    #print('hor: ' + str(hor))
+    #print('ver: ' + str(ver))
 
     # Fill values in hor[][] and ver[][]
     for i in range(N):
@@ -72,8 +72,8 @@ def findSubSquare(mat):
                 else:
                     hor[i][j] = hor[i][j - 1] + 1
 
-    print('hor: ' + str(hor))
-    print('ver: ' + str(ver))
+    #print('hor: ' + str(hor))
+    #print('ver: ' + str(ver))
 
 
 
@@ -94,7 +94,7 @@ def findSubSquare(mat):
             # ver[][]. A Square can only be made by
             # taking smaller value
             small = getMin(hor[i][j], ver[i][j])
-            print(str(small) + ': (' + str(j) + ',' + str(i) + ')')
+            #print(str(small) + ': (' + str(j) + ',' + str(i) + ')')
 
             # At this point, we are sure that there
             # is a right vertical line and bottom
@@ -117,7 +117,16 @@ def findSubSquare(mat):
 
                 small -= 1
 
-    print(Bx, By)
-    return Max
+    #print(Bx, By)
+    return (Max, Bx, By)
 
-print('>>' + str(findSubSquare(mat)))
+m, x, y = findSubSquare(mat)
+print(f'>> ({x}, {y}) <<')
+#print(By)
+for i, row in enumerate(mat):
+    for j, ch in enumerate(row):
+        if (i <= y and i > (y-m)) and (j <= x and j > (x-m)):
+            print ('x', end = ' ')
+        else:
+            print(ch, end=' ')
+    print('')
