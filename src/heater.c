@@ -6,7 +6,7 @@
 /*   By: rmckinno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:40:26 by rmckinno          #+#    #+#             */
-/*   Updated: 2020/01/29 18:13:39 by rmckinno         ###   ########.fr       */
+/*   Updated: 2020/01/29 23:36:06 by rmckinno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	fire_map(t_map *m, int **hm)
 			}
 			else
 				hm[y][x] = num_free_spaces(m->map[y][x], m->map[y - 1][x], \
-						m->map[y][x - 1], m->map[y-1][x-1]);
+						m->map[y][x - 1], m->map[y - 1][x - 1]);
 			x++;
 		}
 		x = 0;

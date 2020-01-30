@@ -6,53 +6,65 @@
 /*   By: rmckinno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:00:41 by rmckinno          #+#    #+#             */
-/*   Updated: 2020/01/29 21:28:09 by rmckinno         ###   ########.fr       */
+/*   Updated: 2020/01/29 23:34:39 by rmckinno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/ft_bsq.h"
 
-int	main(int argc, char *argv[])
+void	draw_map(t_map *m)
 {
-	int fd;
-	int a;
-	t_map *m;
+	int i;
 
-	if (argc < 2)
-	{
-		printf("read from stdin\n");
-		return (0);
-	}
+	i = 0;
+	while (i < m->lines)
+		ft_println(m->map[i++]);
+}
+
+void	draw_map_from_args(int argc, char *argv[])
+{
+	int		fd;
+	int		a;
+	t_map	*m;
+
 	a = 1;
 	while (a < argc)
 	{
-		printf("filename: %s\n", argv[a]);
 		fd = open(argv[a], O_RDONLY);
 		m = get_map(fd);
 		close(fd);
 		if (!m)
-			printf("map error");
+			ft_println("map error");
 		else
 		{
 			solve_map(m);
-			for (int i=0;i<m->lines;i++)
-				printf("%s\n", m->map[i]);
+			draw_map(m);
 		}
-		printf("\n");
+		if (a < argc - 1)
+			write(1, "\n", 1);
 		a++;
 	}
+}
 
+int		main(int argc, char *argv[])
+{
+	int		fd;
+	int		a;
+	t_map	*m;
 
-	/*fd = open("maps/10-10-2.map", O_RDONLY);
-	m = get_map(fd);
-	close(fd);
-	if (!m)
-		printf("map error\n");
-	else
+	a = 1;
+	if (argc < 2)
 	{
-		solve_map(m);
-		for (int i=0;i<m->lines;i++)
-			printf("%s\n", m->map[i]);
-	}*/
+		m = get_map(STDIN_FILENO);
+		if (!m)
+			ft_println("map error");
+		else
+		{
+			solve_map(m);
+			draw_map(m);
+		}
+	}
+	else
+		draw_map_from_args(argc, argv);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rmckinno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:48:47 by rmckinno          #+#    #+#             */
-/*   Updated: 2020/01/29 21:17:30 by rmckinno         ###   ########.fr       */
+/*   Updated: 2020/01/29 23:34:04 by rmckinno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		verify_square(int **hm, int y, int x, int max)
 	int side;
 	int cy;
 	int cx;
-	
+
 	cy = y;
 	cx = x;
 	if (y < 0 || x < 0 || hm[y][x] < max)
@@ -29,7 +29,7 @@ int		verify_square(int **hm, int y, int x, int max)
 		{
 			if (hm[cy][cx] == 0)
 			{
-				hm[y][x]--;	
+				hm[y][x]--;
 				return (verify_square(hm, y, x, max));
 			}
 			cx--;
@@ -73,7 +73,7 @@ void	find_from_corner(t_map *m, int **hm)
 	while (--y >= 0)
 	{
 		while (--x >= 0)
-		{	
+		{
 			if (verify_square(hm, y, x, max))
 			{
 				max = hm[y][x];
@@ -81,7 +81,7 @@ void	find_from_corner(t_map *m, int **hm)
 				mx = x;
 			}
 		}
-		x = m->length;;
+		x = m->length;
 	}
 	draw_to_map(m, my, mx, max);
 }

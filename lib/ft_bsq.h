@@ -6,7 +6,7 @@
 /*   By: rmckinno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:07:43 by rmckinno          #+#    #+#             */
-/*   Updated: 2020/01/29 16:56:08 by rmckinno         ###   ########.fr       */
+/*   Updated: 2020/01/29 23:12:29 by rmckinno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef	struct	s_map
 int		ft_atoi(char *str);
 char	*ft_read_line(int fd);
 int		ft_min(int a, int b);
+void	ft_println(char *str);
 t_map	*get_map(int file);
 void	solve_map(t_map *m);
 int		**make_heat_map(t_map *m);

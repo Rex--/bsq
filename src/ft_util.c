@@ -6,7 +6,7 @@
 /*   By: rmckinno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 12:40:14 by rmckinno          #+#    #+#             */
-/*   Updated: 2020/01/29 14:33:37 by rmckinno         ###   ########.fr       */
+/*   Updated: 2020/01/29 23:35:26 by rmckinno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,20 @@ char	*ft_read_line(int fd)
 	return (start);
 }
 
-int ft_min(int a, int b)
+int		ft_min(int a, int b)
 {
 	if (a < b)
 		return (a);
 	else
 		return (b);
-}	
+}
+
+void	ft_println(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		write(1, &str[i++], 1);
+	write(1, "\n", 1);
+}
