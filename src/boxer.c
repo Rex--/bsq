@@ -6,62 +6,90 @@
 /*   By: rmckinno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:48:47 by rmckinno          #+#    #+#             */
-/*   Updated: 2020/01/29 18:13:41 by rmckinno         ###   ########.fr       */
+/*   Updated: 2020/01/29 21:17:30 by rmckinno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/ft_bsq.h"
 
-void	find_square(t_map *m, int **hm)
+int		verify_square(int **hm, int y, int x, int max)
 {
+	int side;
+	int cy;
+	int cx;
+	
+	cy = y;
+	cx = x;
+	if (y < 0 || x < 0 || hm[y][x] < max)
+		return (0);
+	side = hm[y][x];
+	while (cy > (y - side))
+	{
+		while (cx > (x - side))
+		{
+			if (hm[cy][cx] == 0)
+			{
+				hm[y][x]--;	
+				return (verify_square(hm, y, x, max));
+			}
+			cx--;
+		}
+		cx = x;
+		cy--;
+	}
+	return (1);
+}
+
+void	draw_to_map(t_map *m, int y, int x, int s)
+{
+	int cy;
+	int cx;
+
+	cy = y;
+	cx = x;
+	while (cy > (y - s))
+	{
+		while (cx > (x - s))
+		{
+			m->map[cy][cx] = m->full;
+			cx--;
+		}
+		cx = x;
+		cy--;
+	}
+}
+
+void	find_from_corner(t_map *m, int **hm)
+{
+	int max;
 	int y;
 	int x;
 	int my;
 	int mx;
-	int max;
 
-	y = (m->lines - 1);
-	x = (m->length - 1);
-	my = 0;
-	mx = 0;
-	max = 1;
-	while (m->map[my][mx] != m->empty)
+	max = 0;
+	y = m->lines;
+	x = m->length;
+	while (--y >= 0)
 	{
-		if (mx == x)
-		{
-			mx = 0;
-			my++;
+		while (--x >= 0)
+		{	
+			if (verify_square(hm, y, x, max))
+			{
+				max = hm[y][x];
+				my = y;
+				mx = x;
+			}
 		}
-		else
-			mx++;
+		x = m->length;;
 	}
-	printf("Found 1x1: (%i,%i)\n", mx, my);
-	/*while (y >= 0)
-	{
-		while (x >= 0)
-		{
-			while (im[y][x] > max)
-				while(im[y]
-		}
-	}*/
+	draw_to_map(m, my, mx, max);
 }
 
 void	solve_map(t_map *m)
 {
 	int **heat_map;
-	int i;
-	int c;
 
 	heat_map = make_heat_map(m);
-	i = 0;
-	c = 0;
-	while (i < m->lines)
-	{
-		while (c < m->length)
-			printf("%i ", heat_map[i][c++]);
-		printf("\n");
-		c = 0;
-		i++;
-	}
-	find_square(m, heat_map);
+	find_from_corner(m, heat_map);
 }
