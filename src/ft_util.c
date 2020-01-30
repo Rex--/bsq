@@ -6,7 +6,7 @@
 /*   By: rmckinno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 12:40:14 by rmckinno          #+#    #+#             */
-/*   Updated: 2020/01/29 01:53:11 by rmckinno         ###   ########.fr       */
+/*   Updated: 2020/01/29 14:33:37 by rmckinno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,3 +64,11 @@ char	*ft_read_line(int fd)
 	}
 	return (start);
 }
+
+int ft_min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	else
+		return (b);
+}	
